@@ -1,44 +1,26 @@
 <template>
-    <div
-      class="logo"
-      @click="$router.push({
-          path: '/',
-        })">
-      <div class="black" style="color: white">to</div>
-      doApp
-    </div>
+  <div class="flex flex-col items-center justify-center h-screen">
+    <h1 class="text-4xl font-bold mb-4">Welcome to Our Clothing Store</h1>
+    <h1>{{ userStore.number }}</h1>
+    <p class="text-lg text-gray-600">Discover the latest trends in fashion.</p>
+    <router-link to="/auth/login" class="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+      Start Shopping
+    </router-link>
+   
+  </div>
 </template>
 
-<style scoped>
-.logo {
-  font-size: 30px;
-  margin: 20px auto;
-  cursor: pointer;
-  position: relative;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-}
-.black {
-  background-color: #1e2731;
-  position: relative;
-  top: -8px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  width: 55px;
-  height: 45px;
-  margin: 0px;
-}
-</style>
-
 <script lang="ts">
-import route from '../../route/index'
+import router from '../../router/index'
+import  { useAuthStore } from '../../store'
     export default {
         name: 'Logo',
         setup() {
+          const userStore = useAuthStore()
+
             return {
-                route
+              router,
+                userStore
             }
         },
     }

@@ -1,4 +1,5 @@
 <template>
+    <h1>Compoent login aaaaaaaaaa</h1>
     <form @submit.prevent="login">
       <div class="form-group">
         <label for="username">Username</label>
@@ -15,10 +16,13 @@
   <script lang="ts">
   import RepositoryFactory from '../../repository/factory'
   import { ref } from 'vue'
+  import  router  from '../../router/index'
+  import { useAuthStore } from '../../store'
   
   const authRepository = RepositoryFactory.get('auth')
-  
+  const userStore = useAuthStore()
   export default {
+    name: 'loginComponent',
     setup() {
       const username = ref('')
       const password = ref('')
@@ -35,6 +39,10 @@
           console.log('Login successful')
           console.log(result)
           localStorage.setItem('token', result.token)
+          userStore.setToken(result.token);
+          // this.$router.push({ name: 'home' })
+
+          router.push({ name: 'home' })
         } catch (error) {
           console.log(username.value, password.value)
           console.log(error)

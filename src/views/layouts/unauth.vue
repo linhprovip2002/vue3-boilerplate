@@ -1,12 +1,12 @@
 <template>
-    <div class="unauth-layout">
+   
         <h2>unauth layouts</h2>
+        <router-view />
         <Logo/>
         <slot/>
-    </div>
 </template>
 
-<script>
+<script lang="ts">
 import Logo from '../../components/uncommon/logo.vue'
 export default {
     name: 'UnauthLayouts',
