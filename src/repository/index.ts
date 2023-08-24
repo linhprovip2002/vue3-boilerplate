@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 const Repository = {
-  get: (url:string, params = {}, token = {} ||null, query = null) =>
+  get: (url:string, params = {}, token = {} ||null) =>
     axiosInstance
       .get(url, {
         params,
@@ -27,7 +27,7 @@ const Repository = {
       .then((response) => response.data)
       .catch((error) => Promise.reject(error)),
 
-  post: (url:string, data = {}, params = {}, token = null, query = null) =>
+  post: (url:string, data = {}, params = {}, token = null) =>
     axiosInstance
       .post(url, data, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -36,7 +36,7 @@ const Repository = {
       .then((response) => response.data)
       .catch((error) => Promise.reject(error)),
 
-  put: (url:string, data = {}, params = {}, token = null, query = null) =>
+  put: (url:string, data = {}, params = {}, token = null) =>
     axiosInstance
       .put(url, data, {
         params,
@@ -45,7 +45,7 @@ const Repository = {
       .then((response) => response.data)
       .catch((error) => Promise.reject(error)),
 
-  delete: (url:string, data = {}, params = {}, token = null, query = null) =>
+  delete: (url:string, data = {}, params = {}, token = null) =>
     axiosInstance
       .delete(url, {
         params,
@@ -54,7 +54,7 @@ const Repository = {
       .then((response) => response.data)
       .catch((error) => Promise.reject(error)),
 
-  postWithFile: (url:string, data:any, token = null, query = null, params = {}) => {
+  postWithFile: (url:string, data:any, token = null, params = {}) => {
     const headers = {
       'Content-Type': 'multipart/form-data',
        Authorization: `Bearer ${token}` 

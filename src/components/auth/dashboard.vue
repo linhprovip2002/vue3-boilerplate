@@ -16,6 +16,7 @@
                 <td>{{user.name}}</td>
                 <td>{{user.age}}</td>
                 <td>{{user.email}}</td>
+                <td><button @click="xemchitiet(user.id)"> xem chi tiet </button></td>
             </tr>
         </tbody>
     </table>
@@ -25,7 +26,9 @@
 import { ref,onMounted } from 'vue'
 import RepositoryFactory from '../../repository/factory'
 import User from '../../model/User'
+// import { useAuthStore } from '../../store'
 const usersRepository = RepositoryFactory.get('users')
+// const userStore  = useAuthStore()
 export default {
     name: 'dashboard',
      setup() {
@@ -34,16 +37,35 @@ export default {
           {
             const result = await usersRepository.getall(localStorage.getItem('token'))
             console.log(result);
-            dataUsers.value = result.data
+            dataUsers.value = result
+          };
+          const getpage= async ()=>
+          {     
+                const params = 
+                {
+                    page:2,
+                    limit:2
+                }
+                console.log(params);
+                
+                const result = await usersRepository.getall(localStorage.getItem('token'),params)
+                console.log(result);
           };
           onMounted(()=>
             {
-               getall()
+                getall(),
+                getpage()
             })
+            const xemchitiet = async (id: number) => {
+                const  result = await usersRepository.getDetail(id,localStorage.getItem('token'))
+                 console.log(result);
+            }
           return {
                dataUsers,
                getall,
-               onMounted
+               onMounted,
+               xemchitiet,
+               getpage
           }
      }
 }

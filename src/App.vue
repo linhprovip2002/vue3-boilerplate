@@ -26,8 +26,9 @@ export default defineComponent({
   setup() {
     const layout = ref('DefaultLayout');
     const isAuth = ref(false);
-
     const checkAuth = () => {
+      console.log("aaaa");
+      
       if (localStorage.getItem('token')) {
         isAuth.value = true;
         layout.value = 'DefaultLayout';
@@ -42,7 +43,9 @@ export default defineComponent({
       layout.value = isAuth.value ? 'DefaultLayout' : 'UnauthLayout';
     });
 
+  
     checkAuth();
+  
 
     return {
       layout,
