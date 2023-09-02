@@ -45,7 +45,7 @@ const Repository = {
       .then((response) => response.data)
       .catch((error) => Promise.reject(error)),
 
-  delete: (url:string, data = {}, params = {}, token = null) =>
+  delete: (url:string, params = {}, token = null) =>
     axiosInstance
       .delete(url, {
         params,
